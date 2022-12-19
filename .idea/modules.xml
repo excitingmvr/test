@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test_web_xdm.main.iml" filepath="$PROJECT_DIR$/.idea/modules/test_web_xdm.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-972939536/test_web_xdm.test_core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-972939536/test_web_xdm.test_core.main.iml" />
+    </modules>
+  </component>
+</project>

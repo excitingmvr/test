@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.stylebot.collie.dept.DeptDAO">
-
+<mapper namespace="com.example.test.core.codeGroup.CodeGroupDao">
     <sql id="deptColumns">
-        DEPTNO,
-        DNAME,
-        LOC
+        codeGroupSeq,
+        codeGroupName,
+        codeGroupNameEng,
+        codeGroupUseNY,
+        codeGroupDelNy
+        codeGroupRegdate,
+        codeGroupUpdate
     </sql>
 
-    <select id="findAll" resultType="kr.co.stylebot.collie.dept.DeptDTO">
+    <select id="selectList" resultType="com.example.test.core.codeGroup.CodeGroupDTO">
         SELECT <include refid="deptColumns"/>
-        FROM DEPT
-
+        FROM CodeGroup
     </select>
 
-    <insert id="insert" parameterType="kr.co.stylebot.collie.dept.Dept">
-        INSERT INTO DEPT(
+    <insert id="insert" parameterType="com.example.test.core.codeGroup.CodeGroup">
+        INSERT INTO insert(
         <include refid="deptColumns"/>
         )VALUES (
-        #{deptNo},
-        #{dName},
-        #{locate}
+        #{codeGroupSeq},
+        #{codeGroupName},
+        #{codeGroupNameEng},
+        #{codeGroupUseNy},
+        #{codeGroupDelNy},
+        #{codeGroupRegdate},
+        #{codeGroupUpdate}
         )
     </insert>
 

@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import com.junefw.infra.common.constants.Constants;
-
+import com.example.test.core.constants.Constants;
 public class UtilCookie {
 	
     public static Cookie createCookie(String name, String value) throws Exception {

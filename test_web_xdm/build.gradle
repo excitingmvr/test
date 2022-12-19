@@ -24,5 +24,12 @@ tasks.named('test') {
 }
 
 dependencies {
+
+    implementation 'org.projectlombok:lombok:1.18.22'
     implementation project(':test_core')
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }

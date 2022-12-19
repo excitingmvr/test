@@ -1,4 +1,4 @@
-package com.example.test.web.xdm;
+package com.example.test.core;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
