@@ -1,0 +1,4 @@
+rootProject.name = 'test_web_xdm'
+
+include 'test_core'
+project(':test_core').projectDir = new File(settingsDir, '../test_core')
