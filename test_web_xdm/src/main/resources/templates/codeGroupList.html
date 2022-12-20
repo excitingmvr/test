@@ -12,9 +12,9 @@
                 <td>seq</td>
                 <td>코드그룹이름</td>
                 <td>코드그룹 영어이름</td>
-                <td>코드그룹 사용어부</td>
-                <td>코드그룹 삭제어부</td>
+                <td>코드그룹 사용여부</td>
                 <td>코드그룹 생성날짜</td>
+                <td>코드그룹 수정날짜</td>
             </tr>
         </thead>
         <tbody>
@@ -23,10 +23,8 @@
                 <td th:text="${member.codeGroupName}"></td>
                 <td th:text="${member.codeGroupNameEng}"></td>
                 <td th:text="${member.codeGroupUseNY}"></td>
-                <td th:text="${member.codeGroupDelNY}"></td>
                 <td th:text="${member.codeGroupRegdate}"></td>
                 <td th:text="${member.codeGroupUpdate}"></td>
-
             </tr>
         </tbody>
     </table>
