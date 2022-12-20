@@ -11,4 +11,5 @@ import java.util.List;
 
 public interface CodeGroupDao {
     List<CodeGroup> selectList();
+    int insert();
 }
