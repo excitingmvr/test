@@ -19,11 +19,8 @@ public class RedisConfig {
     private String host;
     @Value("${spring.redis.port}")
     private int port;
-
     public static final String REDIS_TIME_FORMAT = "yyyyMMddHHmmss";
-
     // 기본서버
-
     @Bean
     public RedisTemplate<String, Long> redisTemplateForRefreshToken(LettuceConnectionFactory connectionFactory) {
         RedisTemplate<String, Long> redisTemplate = new RedisTemplate<>();
@@ -40,5 +37,4 @@ public class RedisConfig {
         redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(String.class));
         return redisTemplate;
     }
-
 }
