@@ -1,3 +1,3 @@
-sudo java -jar /home/centos/deploy.jar &;
+sudo nohup java -jar /home/centos/deploy.jar &
 exit 0;
 
