@@ -1,3 +1,6 @@
-sudo nohup java -jar /home/centos/deploy.jar /home/centos/nohup.out 2>&1 &
+STDOUT=/home/centos/stdout.log
+STDERR=/home/centos/stderr.log
+
+sudo nohup java -jar /home/centos/deploy.jar 1>>$STDOUT 2>> $STDERR &
 exit 0;
 
