@@ -1,4 +1,3 @@
-name: Java CI with Gradle
 
 on:
   push:
@@ -22,8 +21,10 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+
       - name: create main boot jar
         run: ./gradlew bootJar -p ./test_web_xdm
+
       - name: Copy Jar
         run: cp ./test_web_xdm/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar deploy.jar
 
@@ -32,6 +33,12 @@ jobs:
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
+
+      - name: cp appspec file
+        run: cp ./test_web_xdm/appspec-test_web_xdm.yml appspec.yml
+
+      - name: cp script files
+        run: cp -r ./test_web_xdm/scripts scripts
 
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip ./appspec.yml ./deploy.jar ./scripts
@@ -46,5 +53,6 @@ jobs:
 
       - name: upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://test-awss3-vic
+
       - name: code deploy
         run: aws deploy create-deployment --application-name test-server --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name test-server-group --s3-location bucket=test-awss3-vic,bundleType=zip,key=$GITHUB_SHA.zip

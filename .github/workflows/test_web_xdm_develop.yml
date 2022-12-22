@@ -22,8 +22,10 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+
       - name: create main boot jar
         run: ./gradlew bootJar -p ./test_web_xdm
+
       - name: Copy Jar
         run: cp ./test_web_xdm/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar deploy.jar
 
@@ -52,5 +54,6 @@ jobs:
 
       - name: upload to S3
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://test-awss3-vic
+
       - name: code deploy
         run: aws deploy create-deployment --application-name test-server --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name test-server-group --s3-location bucket=test-awss3-vic,bundleType=zip,key=$GITHUB_SHA.zip
