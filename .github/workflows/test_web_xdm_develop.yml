@@ -1,11 +1,18 @@
 name: Java CI with Gradle
-
+# 27,30,39,42,53,56(2),59(3) 경로 변수 처리
 on:
   push:
     branches: [ "develop" ]
 #  pull_request:
 #    branches: [ "master" ]
-
+env:
+  AWS_REGION: ap-northeast-2
+  MODULE_ROOT_PATH: ./test_web_xdm
+  MODULE_JAR_PATH: $MODULE_ROOT_PATH/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar
+  MODULE_DEPLOY_PATH: $MODULE_ROOT_PATH/deploy
+  S3_BUCKET_NAME: test-awss3-vic
+  AWS_CODE_DEPLOY_APP_NAME: test-server
+  AWS_CODE_DEPLOY_APP_GROUP_NAME: test-server-group
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -24,22 +31,16 @@ jobs:
         run: ./gradlew build
 
       - name: create main boot jar
-        run: ./gradlew bootJar -p ./test_web_xdm
+        run: ./gradlew bootJar -p $MODULE_ROOT_PATH
 
       - name: Copy Jar
-        run: cp ./test_web_xdm/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar deploy.jar
-
-      - name: Cleanup Gradle Cache
-        if: ${{ always() }}
-        run: |
-          rm -f ~/.gradle/caches/modules-2/modules-2.lock
-          rm -f ~/.gradle/caches/modules-2/gc.properties
+        run: cp $MODULE_JAR_PATH deploy.jar
 
       - name: cp appspec file
-        run: cp ./test_web_xdm/appspec-test_web_xdm.yml appspec.yml
+        run: cp $MODULE_DEPLOY_PATH/appspec-test_web_xdm.yml appspec.yml
 
       - name: cp script files
-        run: cp -r ./test_web_xdm/scripts scripts
+        run: cp -r $MODULE_DEPLOY_PATH scripts
 
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip ./appspec.yml ./deploy.jar ./scripts
@@ -50,10 +51,10 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
+          aws-region: $AWS_REGION
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://test-awss3-vic
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME
 
       - name: code deploy
-        run: aws deploy create-deployment --application-name test-server --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name test-server-group --s3-location bucket=test-awss3-vic,bundleType=zip,key=$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name $AWS_CODE_DEPLOY_APP_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name $AWS_CODE_DEPLOY_APP_GROUP_NAME --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$GITHUB_SHA.zip
