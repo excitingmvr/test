@@ -11,8 +11,15 @@ spring:
     url: jdbc:log4jdbc:mysql://mydb.cyqagiaocgni.ap-northeast-2.rds.amazonaws.com:33066/mydb
   thymeleaf:
     cache: false
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
 mybatis:
   config-location: classpath:/mybatis/config/config.xml
   mapper-locations: classpath:/mybatis/mapper/*.xml
+
+
 
