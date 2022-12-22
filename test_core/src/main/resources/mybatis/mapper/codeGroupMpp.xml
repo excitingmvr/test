@@ -2,29 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.test.core.infra.codeGroup.CodeGroupDao">
+    <resultMap id="resultMapObj" type="com.example.test.core.infra.codeGroup.CodeGroup"></resultMap>
     <sql id="deptColumns">
         codeGroupName,
         codeGroupNameEng,
         codeGroupUseNY,
-        codeGroupDelNY,
-        codeGroupRegdate,
-        codeGroupUpdate
+        codeGroupDelNY
     </sql>
 
     <select id="selectList" resultType="com.example.test.core.infra.codeGroup.CodeGroup">
         SELECT codeGroupSeq,
+        codeGroupRegdate,
+        codeGroupUpdate,
         <include refid="deptColumns"/>
         FROM CodeGroup
     </select>
 
-    <insert id="insert" parameterType="com.example.test.core.infra.codeGroup.CodeGroup">
+    <insert id="insert">
         INSERT INTO CodeGroup(
            <include refid="deptColumns"/>
         ) VALUES (
             #{codeGroupName},
             #{codeGroupNameEng},
             #{codeGroupUseNy},
-            #{codeGroupDelNy},
+            #{codeGroupDelNy}
         )
         <selectKey resultType="String" keyProperty="codeGroupSeq" order="AFTER">
             select last_insert_id()
