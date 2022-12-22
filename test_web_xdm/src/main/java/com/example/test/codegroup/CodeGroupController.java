@@ -2,6 +2,7 @@ package com.example.test.codegroup;
 
 import com.example.test.core.infra.codeGroup.CodeGroup;
 import com.example.test.core.infra.codeGroup.CodeGroupService;
+import com.example.test.core.infra.codeGroup.CodeGroupVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +20,17 @@ public class CodeGroupController {
     }
     @RequestMapping(value= "/insert")
     public String CodeGroupInst(CodeGroup dto) throws  Exception {
-        codeGroupService.insert(dto);
-        return "infra/codegroup/codeGroupList";
+            codeGroupService.insert(dto);
+        return "redirect:/list";
+    }
+    @RequestMapping(value= "/update")
+    public String CodeGroupUpdt(CodeGroup dto) throws  Exception {
+            codeGroupService.update(dto);
+        return "redirect:/list";
     }
     @RequestMapping(value= "/form")
-    public String CodeGroupForm(Model model) throws  Exception {
+    public String CodeGroupForm(Model model, CodeGroupVo vo) throws  Exception {
+            model.addAttribute("item", codeGroupService.selectOne(vo));
         return "infra/codegroup/codeGroupForm";
     }
 }

@@ -11,5 +11,7 @@ import java.util.List;
 
 public interface CodeGroupDao {
     List<CodeGroup> selectList();
-    int insert();
+    int insert(CodeGroup dto);
+    int update(CodeGroup dto);
+    CodeGroup selectOne(CodeGroupVo vo);
 }

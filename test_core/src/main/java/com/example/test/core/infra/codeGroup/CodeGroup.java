@@ -1,6 +1,9 @@
 package com.example.test.core.infra.codeGroup;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 @Data
 public class CodeGroup {
     private String codeGroupSeq;
