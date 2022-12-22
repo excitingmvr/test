@@ -1,10 +1,12 @@
-package com.example.test.core.util;
+package com.example.test.core.common.util;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import com.example.test.core.constants.Constants;
+
+import com.example.test.core.common.constants.Constants;
+
 public class UtilDateTime {
 	
 	

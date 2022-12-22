@@ -1,4 +1,4 @@
-package com.example.test.core.util;
+package com.example.test.core.common.util;
 
 import java.io.File;
 import java.util.UUID;

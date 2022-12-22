@@ -1,4 +1,4 @@
-package com.example.test.core.util;
+package com.example.test.core.common.util;
 
 import java.util.Properties;
 //

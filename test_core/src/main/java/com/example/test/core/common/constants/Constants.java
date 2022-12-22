@@ -1,5 +1,5 @@
 
-package com.example.test.core.constants;
+package com.example.test.core.common.constants;
 
 public final class Constants {
 

@@ -87,12 +87,12 @@
           <element id="library" level="project" name="Gradle: org.unbescape:unbescape:1.1.6.RELEASE" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="test_core.main/web/Web" />
       <element id="javaee-facet-resources" facet="test_core.test/web/Web" />
-      <element id="javaee-facet-resources" facet="test_web_xdm.main/web/Web" />
-      <element id="javaee-facet-resources" facet="test_web_xdm.test/web/Web" />
-      <element id="javaee-facet-resources" facet="test_web_xdm.test_core.main/web/Web" />
       <element id="javaee-facet-resources" facet="test_web_xdm.test_core.test/web/Web" />
+      <element id="javaee-facet-resources" facet="test_web_xdm.test_core.main/web/Web" />
+      <element id="javaee-facet-resources" facet="test_core.main/web/Web" />
+      <element id="javaee-facet-resources" facet="test_web_xdm.test/web/Web" />
+      <element id="javaee-facet-resources" facet="test_web_xdm.main/web/Web" />
     </root>
   </artifact>
 </component>

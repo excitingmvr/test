@@ -1,9 +1,8 @@
-package com.example.test.infra.codeGroup;
+package com.example.test.core.infra.codeGroup;
 
 import lombok.Data;
-
 @Data
-public class CodeGroupDTO {
+public class CodeGroup {
     private String codeGroupSeq;
     private String codeGroupName;
     private String codeGroupNameEng;

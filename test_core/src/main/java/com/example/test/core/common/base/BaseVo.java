@@ -1,6 +1,6 @@
-package com.example.test.core.base;
+package com.example.test.core.common.base;
 
-import com.example.test.core.constants.Constants;
+import com.example.test.core.common.constants.Constants;
 
 
 public class BaseVo {

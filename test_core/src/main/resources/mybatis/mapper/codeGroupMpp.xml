@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.test.infra.codeGroup.CodeGroupDao">
+<mapper namespace="com.example.test.core.infra.codeGroup.CodeGroupDao">
+    <resultMap id="resultMapObj" type="com.example.test.infra.codeGroup.codeG"></resultMap>
     <sql id="deptColumns">
         codeGroupName,
         codeGroupNameEng,
         codeGroupUseNY,
-        codeGroupDelNy
+        codeGroupDelNY,
         codeGroupRegdate,
-        codeGroupUpdate,
+        codeGroupUpdate
     </sql>
 
-    <select id="selectList" resultType="com.example.test.infra.codeGroup.CodeGroupDTO">
-        SELECT <include refid="deptColumns"/>
-         codeGroupSeq
+    <select id="selectList" resultType="com.example.test.core.infra.codeGroup.CodeGroup">
+        SELECT codeGroupSeq,
+        <include refid="deptColumns"/>
         FROM CodeGroup
     </select>
 
-    <insert id="insert" parameterType="com.example.test.infra.codeGroup.CodeGroup">
-        INSERT INTO insert(
+    <insert id="insert" parameterType="com.example.test.core.infra.codeGroup.CodeGroup">
+        INSERT INTO CodeGroup(
            <include refid="deptColumns"/>
         ) VALUES (
             #{codeGroupName},
             #{codeGroupNameEng},
             #{codeGroupUseNy},
             #{codeGroupDelNy},
-            now(),
-            now()
         )
         <selectKey resultType="String" keyProperty="codeGroupSeq" order="AFTER">
             select last_insert_id()

@@ -1,4 +1,4 @@
-package com.example.test.infra.codeGroup;
+package com.example.test.core.infra.codeGroup;
 
 
 import org.apache.ibatis.annotations.Mapper;

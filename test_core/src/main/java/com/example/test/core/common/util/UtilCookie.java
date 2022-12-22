@@ -1,4 +1,4 @@
-package com.example.test.core.util;
+package com.example.test.core.common.util;
 
 
 import java.net.URLEncoder;
@@ -7,9 +7,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.test.core.common.constants.Constants;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import com.example.test.core.constants.Constants;
+
 public class UtilCookie {
 	
     public static Cookie createCookie(String name, String value) throws Exception {
