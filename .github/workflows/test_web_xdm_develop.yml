@@ -8,8 +8,8 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   MODULE_ROOT_PATH: ./test_web_xdm
-  MODULE_JAR_PATH: $MODULE_ROOT_PATH/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar
-  MODULE_DEPLOY_PATH: $MODULE_ROOT_PATH/deploy
+  MODULE_JAR_PATH: ./test_web_xdm/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar
+  MODULE_DEPLOY_PATH: ./test_web_xdm/deploy
   S3_BUCKET_NAME: test-awss3-vic
   AWS_CODE_DEPLOY_APP_NAME: test-server
   AWS_CODE_DEPLOY_APP_GROUP_NAME: test-server-group
