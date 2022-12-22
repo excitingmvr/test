@@ -15,8 +15,8 @@ hooks:
   BeforeInstall:
     - location: scripts/afterInstall.sh
       timeout: 30
-
-  ApplicationStart:
-    - location: scripts/applicationStart.sh
-      timeout: 60
-
+#
+#  ApplicationStart:
+#    - location: scripts/applicationStart.sh
+#      timeout: 60
+#
