@@ -6,10 +6,12 @@ on:
 #  pull_request:
 #    branches: [ "master" ]
 env:
-  AWS_REGION: ap-northeast-2
+
   MODULE_ROOT_PATH: ./test_web_xdm
   MODULE_JAR_PATH: ./test_web_xdm/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar
   MODULE_DEPLOY_PATH: ./test_web_xdm/deploy
+  MODULE_DEPLOY_APPSPEC: ./test_web_xdm/deploy/appspec-test_web_xdm.yml
+  AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: test-awss3-vic
   AWS_CODE_DEPLOY_APP_NAME: test-server
   AWS_CODE_DEPLOY_APP_GROUP_NAME: test-server-group
@@ -37,7 +39,7 @@ jobs:
         run: cp $MODULE_JAR_PATH deploy.jar
 
       - name: cp appspec file
-        run: cp $MODULE_DEPLOY_PATH/appspec-test_web_xdm.yml appspec.yml
+        run: cp $MODULE_DEPLOY_APPSPEC appspec.yml
 
       - name: cp script files
         run: cp -r $MODULE_DEPLOY_PATH scripts
