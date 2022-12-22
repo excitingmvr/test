@@ -1,5 +1,5 @@
 name: Java CI with Gradle
-# 27,30,39,42,53,56(2),59(3) 경로 변수 처리
+
 on:
   push:
     branches: [ "develop" ]
