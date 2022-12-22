@@ -1,2 +1,2 @@
-sudo fuser -k 8080/tcp;
+sudo fuser -k 8089/tcp;
 exit 0;
