@@ -5,13 +5,14 @@ on:
 #  pull_request:
 #    branches: [ "master" ]
 env:
-  AWS_REGION: ap-northeast-2
-  MODULE_ROOT_PATH: ./test_web_xdm
-  MODULE_JAR_PATH: $MODULE_ROOT_PATH/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar
-  MODULE_DEPLOY_PATH: $MODULE_ROOT_PATH/deploy
-  S3_BUCKET_NAME: test-awss3-vic
-  AWS_CODE_DEPLOY_APP_NAME: test-server
-  AWS_CODE_DEPLOY_APP_GROUP_NAME: test-server-group
+  MODULE_ROOT_PATH: ./test_web_xdm # 해당 모듈의 루트
+  MODULE_JAR_PATH: ./test_web_xdm/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar # 해당 모듈의 jar
+  MODULE_DEPLOY_PATH: ./test_web_xdm/deploy # 해당 모듈의 deploy 디렉토리
+  MODULE_DEPLOY_APPSPEC: ./test_web_xdm/deploy/appspec-test_web_xdm.yml # 해당 모듈의 appspec 파일
+  AWS_REGION: ap-northeast-2 # aws 리전
+  S3_BUCKET_NAME: test-awss3-vic # s3 버켓 이름
+  AWS_CODE_DEPLOY_APP_NAME: test-server # aws code deploy 애플리케이션 이름
+  AWS_CODE_DEPLOY_APP_GROUP_NAME: test-server-group # 애플리케이션 그룹 이름
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -36,7 +37,7 @@ jobs:
         run: cp $MODULE_JAR_PATH deploy.jar
 
       - name: cp appspec file
-        run: cp $MODULE_DEPLOY_PATH/appspec-test_web_xdm.yml appspec.yml
+        run: cp $MODULE_DEPLOY_APPSPEC appspec.yml
 
       - name: cp script files
         run: cp -r $MODULE_DEPLOY_PATH scripts
@@ -50,10 +51,10 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: $AWS_REGION
+          aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME
+        run: aws s3 cp --region $AWS_REGION ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME
 
-      - name: code deploy
+      - name: send to aws code deploy
         run: aws deploy create-deployment --application-name $AWS_CODE_DEPLOY_APP_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name $AWS_CODE_DEPLOY_APP_GROUP_NAME --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$GITHUB_SHA.zip
