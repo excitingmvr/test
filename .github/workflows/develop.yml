@@ -37,7 +37,7 @@ jobs:
         run: cp ./test_web_xdm/appspec-test_web_xdm.yml appspec.yml
 
       - name: cp script files
-        run: cp ./test_web_xdm/scripts scripts
+        run: cp -r ./test_web_xdm/scripts scripts
 
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip ./appspec.yml ./deploy.jar ./scripts
