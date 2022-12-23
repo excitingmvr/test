@@ -57,6 +57,7 @@
                                 <a class="dropdown-item" href="#"><i class="ti-lock text-muted me-2"></i> Logout</a>
                             </li>
                         </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -104,9 +105,7 @@
                             <a href="#">
                                 <i class="fa fa-archive"><span class="path1"></span><span class="path2"></span></i>
                                 <span>B2B관리</span>
-                                <span class="pull-right-container">
-				  <i class="fa fa-angle-right pull-right"></i>
-				</span>
+                                <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span>
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="#"><i class="fa fa-pencil"><span class="path1"></span><span class="path2"></span></i>B2B 회사 추가</a></li>
@@ -121,39 +120,40 @@
                 </div>
         </section>
     </aside>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <div class="container-full">
             <!-- Main content -->
             <section class="content">
-                <h2>CodeGroup</h2>
-                <div class="table-responsive-sm">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td>seq</td>
-                                <td>코드그룹이름</td>
-                                <td>코드그룹 영어이름</td>
-                                <td>코드그룹 사용여부</td>
-                                <td>코드그룹 삭제여부</td>
-                                <td>코드그룹 생성날짜</td>
-                                <td>코드그룹 수정날짜</td>
+                <form name="form">
+                    <h2>CodeGroup</h2>
+                    <div class="table-responsive-sm">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>seq</td>
+                                    <td>코드그룹이름</td>
+                                    <td>코드그룹 영어이름</td>
+                                    <td>코드그룹 사용여부</td>
+                                    <td>코드그룹 삭제여부</td>
+                                    <td>코드그룹 생성날짜</td>
+                                    <td>코드그룹 수정날짜</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="member : ${list}">
+                                <td th:text="${member.codeGroupSeq}"></td>
+                                <td th:text="${member.codeGroupName}"></td>
+                                <td th:text="${member.codeGroupNameEng}"></td>
+                                <td th:text="${member.codeGroupUseNY}"></td>
+                                <td th:text="${member.codeGroupDelNY}"></td>
+                                <td th:text="${member.codeGroupRegdate}"></td>
+                                <td th:text="${member.codeGroupUpdate}"></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="member : ${list}">
-                            <td th:text="${member.codeGroupSeq}"></td>
-                            <td th:text="${member.codeGroupName}"></td>
-                            <td th:text="${member.codeGroupNameEng}"></td>
-                            <td th:text="${member.codeGroupUseNY}"></td>
-                            <td th:text="${member.codeGroupDelNY}"></td>
-                            <td th:text="${member.codeGroupRegdate}"></td>
-                            <td th:text="${member.codeGroupUpdate}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
             </section>
             <!-- /.content -->
         </div>
@@ -173,7 +173,21 @@
     <script type="text/javascript" src="/uitemplate/eduadmin/js/template.js"></script>
     <script type="text/javascript" src="/uitemplate/eduadmin/js/pages/dashboard.js"></script>
     <script type="text/javascript" src="/uitemplate/eduadmin/js/pages/calendar.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
     <script type="text/javascript">
+        let goUrlForm = "/form";
+        let form = $("form[name=form]")
+        let seq = $("[name=codeGroupSeq]");
+
+        $('#btnForm').on("click", function() {
+            goForm(0);
+        });
+
+        goForm = function(keyValue) {
+            seq.val(keyValue);
+            form.attr("action", goUrlForm).submit();
+        }
     </script>
 </body>
 </html>
