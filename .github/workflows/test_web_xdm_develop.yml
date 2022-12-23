@@ -1,6 +1,8 @@
 name: develop
 
 on:
+  push:
+    branches: ['develop/**']
   workflow_dispatch:
     inputs:
       repository:
