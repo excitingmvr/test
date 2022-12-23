@@ -40,7 +40,7 @@ jobs:
       - name: cp appspec file
         run: cp $MODULE_DEPLOY_APPSPEC appspec.yml
 
-      - name: cp script files
+      - name: cp script files asdfasdf
         run: cp -r $MODULE_DEPLOY_PATH scripts
 
       - name: Make zip file
