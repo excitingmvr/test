@@ -39,7 +39,7 @@ jobs:
       - name: create main boot jar
         run: ./gradlew bootJar -p $MODULE_ROOT_PATH
 
-      - name: Copy Jar
+      - name: Copy Jar asedrygaeryawery
         run: cp $MODULE_JAR deploy.jar
 
       - name: cp appspec file
