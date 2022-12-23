@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       repository:
-        description: 'develop'
+        description: 'master'
         required: true
       sync_only:
         description: 'sync only flag'
