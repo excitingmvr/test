@@ -1,4 +1,4 @@
-name: release
+name: master
 on:
   workflow_dispatch:
     inputs:
@@ -8,8 +8,8 @@ on:
       sync_only:
         description: 'sync only flag'
         required: false
-#  pull_request:
-#    branches: [ "master" ]
+    branch:
+
 env:
   MODULE_ROOT_PATH: ./test_web_xdm # 해당 모듈의 루트
   MODULE_JAR: ./test_web_xdm/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar # 해당 모듈의 jar
