@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       repository:
-        description: 'master'
-        required: true
+        description: 'develop'
+        required: false
       sync_only:
         description: 'sync only flag'
         required: false
