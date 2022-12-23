@@ -29,8 +29,15 @@ public class CodeGroupController {
         return "redirect:/list";
     }
     @RequestMapping(value= "/form")
-    public String CodeGroupForm(Model model, CodeGroupVo vo) throws  Exception {
-            model.addAttribute("item", codeGroupService.selectOne(vo));
+    public String CodeGroupForm(CodeGroupVo vo) throws  Exception {;
+        return "infra/codegroup/codeGroupForm";
+    }
+    @RequestMapping(value= "/view")
+    public String CodeGroupView(Model model, CodeGroupVo vo) throws  Exception {
+
+        System.out.println(vo.getCodeGroupSeq());
+        model.addAttribute("item", codeGroupService.selectOne(vo));
+
         return "infra/codegroup/codeGroupForm";
     }
 }
