@@ -1,8 +1,15 @@
 name: Java CI with Gradle
 
 on:
-  push:
-    branches: [ "develop/**" ]
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'develop/**'
+        required: true
+      sync_only:
+        description: 'sync only flag'
+        required: false
+
 #  pull_request:
 #    branches: [ "master" ]
 env:
