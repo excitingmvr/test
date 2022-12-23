@@ -6,7 +6,7 @@ on:
 #    branches: [ "master" ]
 env:
   MODULE_ROOT_PATH: ./test_web_xdm # 해당 모듈의 루트
-  MODULE_JAR_PATH: ./test_web_xdm/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar # 해당 모듈의 jar
+  MODULE_JAR: ./test_web_xdm/build/libs/test_web_xdm-0.0.1-SNAPSHOT.jar # 해당 모듈의 jar
   MODULE_DEPLOY_PATH: ./test_web_xdm/deploy # 해당 모듈의 deploy 디렉토리
   MODULE_DEPLOY_APPSPEC: ./test_web_xdm/deploy/appspec-test_web_xdm.yml # 해당 모듈의 appspec 파일
   AWS_REGION: ap-northeast-2 # aws 리전
@@ -34,7 +34,7 @@ jobs:
         run: ./gradlew bootJar -p $MODULE_ROOT_PATH
 
       - name: Copy Jar
-        run: cp $MODULE_JAR_PATH deploy.jar
+        run: cp $MODULE_JAR deploy.jar
 
       - name: cp appspec file
         run: cp $MODULE_DEPLOY_APPSPEC appspec.yml
@@ -51,7 +51,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
+          aws-region: ${{ $AWS_REGION }}
 
       - name: upload to S3
         run: aws s3 cp --region $AWS_REGION ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME
