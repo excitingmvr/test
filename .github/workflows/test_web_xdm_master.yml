@@ -1,7 +1,13 @@
-
+name: release
 on:
-  push:
-    branches: [ "master" ]
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'master'
+        required: true
+      sync_only:
+        description: 'sync only flag'
+        required: false
 #  pull_request:
 #    branches: [ "master" ]
 env:
