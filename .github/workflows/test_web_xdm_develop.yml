@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       repository:
-        description: 'develop/**'
+        description: 'develop/2.0.0'
         required: true
       sync_only:
         description: 'sync only flag'
