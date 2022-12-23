@@ -9,7 +9,8 @@ on:
       sync_only:
         description: 'sync only flag'
         required: false
-
+  repository_dispatch:
+    types: [build-event]
 #  pull_request:
 #    branches: [ "master" ]
 env:
