@@ -178,9 +178,9 @@ function checkMobile (objName, pattern, nullAllowedNy, message) {
 function checkLogic (objName, pattern, nullAllowedNy, message, regExp) {
 // checkLogic = function (obj, value, pattern, message, regExp) {
 
-    let obj = document.getElementById(objName);
-    let objValue = document.getElementById(objName).value.trim();
-    let objFeedback = document.getElementById(objName+"Feedback");
+    var obj = document.getElementById(objName);
+    var objValue = document.getElementById(objName).value.trim();
+    var objFeedback = document.getElementById(objName+"Feedback");
 
     if(nullAllowedNy == 0) {
         if(regExp.test(objValue)){

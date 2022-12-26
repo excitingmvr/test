@@ -2,14 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.test.core.infra.codeGroup.CodeGroupDao">
+    <resultMap id="resultMapObj" type="com.example.test.core.infra.codeGroup.CodeGroup"></resultMap>
+
     <sql id="deptColumns">
         codeGroupName,
         codeGroupNameEng,
         codeGroupUseNY,
         codeGroupDelNY,
     </sql>
+    
+    <sql id="slelctCommon">
+        FROM CodeGroup
+        WHERE 1=1
+        <if test="shUseNy != null and !shUseNy.equals('')">AND codeGroupUseNY = #{shUseNy}</if>
+        <if test="shDelNy != null and !shDelNy.equals('')">AND codeGroupDelNY = #{shDelNy}</if>
+        <choose>
+            <when test="shOption == 1">AND codeGroupSeq = #{shValue}</when>
+            <when test="shOption == 2">AND codeGroupName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND codeGroupNameEng LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
 
-    <select id="selectList" resultType="com.example.test.core.infra.codeGroup.CodeGroup">
+    </sql>
+    <select id="selectList" resultMap="resultMapObj">
         SELECT codeGroupSeq,
         <include refid="deptColumns"/>
         codeGroupRegdate,
@@ -17,7 +31,7 @@
         FROM CodeGroup
     </select>
 
-    <select id="selectOne" resultType="com.example.test.core.infra.codeGroup.CodeGroup">
+    <select id="selectOne" resultMap="resultMapObj">
         SELECT codeGroupSeq,
         <include refid="deptColumns"/>
         codeGroupRegdate,

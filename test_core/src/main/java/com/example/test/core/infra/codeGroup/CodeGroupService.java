@@ -8,8 +8,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CodeGroupService {
     private final CodeGroupDao codeGroupDao;
-    public List<CodeGroup> selectList() {
-        return codeGroupDao.selectList();
+    public List<CodeGroup> selectList(CodeGroupVo vo) {
+        return codeGroupDao.selectList(vo);
     }
     public int insert(CodeGroup dto) {
         return codeGroupDao.insert(dto);

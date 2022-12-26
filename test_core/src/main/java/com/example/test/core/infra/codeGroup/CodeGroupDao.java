@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 
 public interface CodeGroupDao {
-    List<CodeGroup> selectList();
+    List<CodeGroup> selectList(CodeGroupVo vo);
     int insert(CodeGroup dto);
     int update(CodeGroup dto);
     CodeGroup selectOne(CodeGroupVo vo);

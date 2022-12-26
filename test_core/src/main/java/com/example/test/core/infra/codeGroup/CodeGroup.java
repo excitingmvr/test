@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
+@Getter
+@Setter
 public class CodeGroup {
     private String codeGroupSeq;
     private String codeGroupName;
