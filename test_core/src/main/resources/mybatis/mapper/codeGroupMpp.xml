@@ -10,8 +10,8 @@
         codeGroupUseNY,
         codeGroupDelNY,
     </sql>
-    
-    <sql id="slelctCommon">
+
+    <sql id="selectCommon">
         FROM CodeGroup
         WHERE 1=1
         <if test="shUseNy != null and !shUseNy.equals('')">AND codeGroupUseNY = #{shUseNy}</if>
@@ -28,7 +28,7 @@
         <include refid="deptColumns"/>
         codeGroupRegdate,
         codeGroupUpdate
-        FROM CodeGroup
+        <include refid="selectCommon"/>
     </select>
 
     <select id="selectOne" resultMap="resultMapObj">

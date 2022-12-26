@@ -125,7 +125,7 @@
         <div class="container-full">
             <!-- Main content -->
             <section class="content">
-                <form name="form">
+                <form name="form" method="post">
                     <input type="hidden" name="codeGroupSeq">
                     <h2>CodeGroup</h2>
                     <div class="box">
@@ -133,12 +133,16 @@
                             <div class="row row-cols-2 row-cols-sm-6 g-2 px-2 mb-4">
                                 <div class="col">
                                     <select class="form-select" name="shDelNy" id="shDelNy">
-
+                                        <option th:selected="${vo.shDelNy == null}" value="">삭제여부</option>
+                                        <option th:selected="${vo.shDelNy == 1}" value="1">Y</option>
+                                        <option th:selected="${vo.shDelNy == 0}" value="0">N</option>
                                     </select>
                                 </div>
                                 <div class="col">
                                     <select class="form-select" name="shUseNy" id="shUseNy">
-
+                                        <option th:selected="${vo.shUseNy == null}" value="">사용여부</option>
+                                        <option th:selected="${vo.shUseNy == 1}" value="1">Y</option>
+                                        <option th:selected="${vo.shUseNy == 0}" value="0">N</option>
                                     </select>
                                 </div>
                                 <div class="col">
@@ -151,11 +155,14 @@
                             <div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
                                 <div class="col">
                                     <select class="form-select" id="shOption" name="shOption">
-
+                                        <option th:selected="${vo.shOption == null}" value="">검색구분</option>
+                                        <option th:selected="${vo.shOption == 1}" value="1">코드그룹 코드</option>
+                                        <option th:selected="${vo.shOption == 2}" value="2">코드그룹 이름</option>
+                                        <option th:selected="${vo.shOption == 3}" value="3">코드그룹 영어 이름</option>
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" id="shValue" name="shValue" placeholder="검색어">
+                                    <input type="text" class="form-control" th:value="${vo.shValue}" id="shValue" name="shValue" placeholder="검색어">
                                 </div>
                                 <div class="col">
                                     <button class="btn btn-secondary"><i class="fa fa-rotate-left"></i></button>
@@ -167,15 +174,15 @@
                     <div class="table-responsive-sm">
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <td>seq</td>
-                                    <td>코드그룹이름</td>
-                                    <td>코드그룹 영어이름</td>
-                                    <td>코드그룹 사용여부</td>
-                                    <td>코드그룹 삭제여부</td>
-                                    <td>코드그룹 생성날짜</td>
-                                    <td>코드그룹 수정날짜</td>
-                                </tr>
+                            <tr>
+                                <td>seq</td>
+                                <td>코드그룹이름</td>
+                                <td>코드그룹 영어이름</td>
+                                <td>코드그룹 사용여부</td>
+                                <td>코드그룹 삭제여부</td>
+                                <td>코드그룹 생성날짜</td>
+                                <td>코드그룹 수정날짜</td>
+                            </tr>
                             </thead>
                             <tbody>
                             <tr th:each="member : ${list}" th:attr="onclick=|goForm('${member.codeGroupSeq}')|">
@@ -199,35 +206,35 @@
         </div>
     </div>
 </div>
-    <!-- Page Content overlay -->
+<!-- Page Content overlay -->
 
-    <script type="text/javascript" src="/uitemplate/eduadmin/js/vendors.min.js"></script>
-    <script type="text/javascript" src="/uitemplate/eduadmin/js/pages/chat-popup.js"></script>
-    <script type="text/javascript" src="/uitemplate/eduadmin/assets/icons/feather-icons/feather.min.js"></script>
+<script type="text/javascript" src="/uitemplate/eduadmin/js/vendors.min.js"></script>
+<script type="text/javascript" src="/uitemplate/eduadmin/js/pages/chat-popup.js"></script>
+<script type="text/javascript" src="/uitemplate/eduadmin/assets/icons/feather-icons/feather.min.js"></script>
 
-    <script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
-    <script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/moment/min/moment.min.js"></script>
-    <script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/fullcalendar/fullcalendar.js"></script>
+<script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
+<script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/fullcalendar/fullcalendar.js"></script>
 
-    <!-- EduAdmin App -->
-    <script type="text/javascript" src="/uitemplate/eduadmin/js/template.js"></script>
-    <script type="text/javascript" src="/uitemplate/eduadmin/js/pages/dashboard.js"></script>
-    <script type="text/javascript" src="/uitemplate/eduadmin/js/pages/calendar.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+<!-- EduAdmin App -->
+<script type="text/javascript" src="/uitemplate/eduadmin/js/template.js"></script>
+<script type="text/javascript" src="/uitemplate/eduadmin/js/pages/dashboard.js"></script>
+<script type="text/javascript" src="/uitemplate/eduadmin/js/pages/calendar.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
-        let goUrlForm = "/codegroup/form";
-        let form = $("form[name=form]")
-        let seq = $("[name=codeGroupSeq]");
+<script type="text/javascript">
+    let goUrlForm = "/codegroup/form";
+    let form = $("form[name=form]")
+    let seq = $("[name=codeGroupSeq]");
 
-        $('#btnForm').on("click", function() {
-            goForm(0);
-        });
+    $('#btnForm').on("click", function() {
+        goForm(0);
+    });
 
-        goForm = function(keyValue) {
-            seq.val(keyValue);
-            form.attr("action", goUrlForm).submit();
-        }
-    </script>
+    goForm = function(keyValue) {
+        seq.val(keyValue);
+        form.attr("action", goUrlForm).submit();
+    }
+</script>
 </body>
 </html>
