@@ -192,7 +192,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex">
+                                    <div class="p-2 me-auto">
+                                        <button class="btn btn-danger" type="button" id="btnDelete" data-bs-toggle="modal" data-bs-target="#myModal">delete</button>
+                                    </div>
                                     <div class="p-2"><button class="btn btn-success" type="button" id="com_it">commit</button></div>
                                 </div>
                             </div>
@@ -201,6 +204,24 @@
                 </div>
             </div>
         </div>
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                   </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" name="" id="btnModalDelete">delete</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </form>
     <script type="text/javascript" src="/uitemplate/eduadmin/js/vendors.min.js"></script>
     <script type="text/javascript" src="/uitemplate/eduadmin/assets/icons/feather-icons/feather.min.js"></script>
@@ -212,7 +233,7 @@
     <script type="text/javascript">
         let goUrlInst = "/codegroup/insert";
         let goUrlUpdt = "/codegroup/update";
-
+        let goUrlDele = "/codegroup/delete";
         let seq = $("input:text[name=codeGroupSeq]");
         let form = $("form[name=form]");
 
@@ -236,6 +257,17 @@
             if(!checkSelectNull('codeGroupUseNY', 2, "코드그룹 사용여부를 선택해주세요.")) return false;
             if(!checkSelectNull('codeGroupDelNY', 2, "코드그룹 삭제여부를 선택해주세요.")) return false;
         }
+        $("#btnDelete").on("click", function(){
+            $(".modal-title").text("확 인");
+            $(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
+            $("#btnModalDelete").show();
+            $("#modalConfirm").modal("show");
+        });
+
+        $("#btnModalDelete").on("click", function(){
+            $("#modalConfirm").modal("hide");
+            form.attr("action", goUrlDele).submit();
+        });
     </script>
 
 </body>

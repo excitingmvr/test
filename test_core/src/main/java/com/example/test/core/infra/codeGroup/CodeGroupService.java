@@ -20,5 +20,6 @@ public class CodeGroupService {
     public CodeGroup selectOne(CodeGroupVo vo) {
         return codeGroupDao.selectOne(vo);
     }
-
+    public int delete(CodeGroupVo vo) { return codeGroupDao.delete(vo); }
+    public int selectOneCount(CodeGroupVo vo) { return codeGroupDao.selectOneCount(vo); }
 }

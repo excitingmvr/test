@@ -21,14 +21,23 @@
             <when test="shOption == 2">AND codeGroupName LIKE CONCAT('%',#{shValue},'%')</when>
             <when test="shOption == 3">AND codeGroupNameEng LIKE CONCAT('%',#{shValue},'%')</when>
         </choose>
-
     </sql>
+
     <select id="selectList" resultMap="resultMapObj">
-        SELECT codeGroupSeq,
+    <include refid="Base.selectListUpperForMysql" />
+        SELECT
+            codeGroupSeq,
         <include refid="deptColumns"/>
-        codeGroupRegdate,
-        codeGroupUpdate
+            codeGroupRegdate,
+         codeGroupUpdate
         <include refid="selectCommon"/>
+        ORDER BY codeGroupSeq DESC
+        <include refid="Base.selectListLowerForMysql" />
+    </select>
+
+    <select id="selectOneCount" resultType="Integer">
+        SELECT COUNT(*)
+        <include refid="selectCommon" />
     </select>
 
     <select id="selectOne" resultMap="resultMapObj">
@@ -66,8 +75,13 @@
             ,codeGroupUpdate = now()
         WHERE
             codeGroupSeq = #{codeGroupSeq}
-
     </update>
+
+    <delete id="delete">
+        delete from CodeGroup
+        where 1=1
+            and codeGroupSeq = #{codeGroupSeq}
+    </delete>
 
 <!--    <select id="selectBoardDetail" parameterType="Long" resultType="BoardDTO">-->
 <!--        SELECT-->

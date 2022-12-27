@@ -18,6 +18,7 @@ public class CodeGroupController {
     private final CodeGroupService codeGroupService;
     @RequestMapping(value = "/list")
     public String CodeGroupList(Model model, @ModelAttribute("vo") CodeGroupVo vo) throws Exception{
+            vo.setParamsPaging(codeGroupService.selectOneCount(vo));
 
             List<CodeGroup> list = codeGroupService.selectList(vo);
             model.addAttribute("list", list);
@@ -32,6 +33,11 @@ public class CodeGroupController {
     @RequestMapping(value= "/update")
     public String CodeGroupUpdt(CodeGroup dto) throws  Exception {
             codeGroupService.update(dto);
+        return "redirect:/codegroup/list";
+    }
+    @RequestMapping(value= "/delete")
+    public String CodeGroupDele(CodeGroupVo vo) throws  Exception {
+        codeGroupService.delete(vo);
         return "redirect:/codegroup/list";
     }
     @RequestMapping(value= "/form")

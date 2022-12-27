@@ -125,48 +125,60 @@
         <div class="container-full">
             <!-- Main content -->
             <section class="content">
-                <form name="form" method="post">
+                <form name="form">
                     <input type="hidden" name="codeGroupSeq">
+                    <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+                    <input type="hidden" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
                     <h2>CodeGroup</h2>
                     <div class="box">
                         <div class="box-body">
-                            <div class="row row-cols-2 row-cols-sm-6 g-2 px-2 mb-4">
-                                <div class="col">
-                                    <select class="form-select" name="shDelNy" id="shDelNy">
-                                        <option th:selected="${vo.shDelNy == null}" value="">삭제여부</option>
-                                        <option th:selected="${vo.shDelNy == 1}" value="1">Y</option>
-                                        <option th:selected="${vo.shDelNy == 0}" value="0">N</option>
-                                    </select>
+                            <div id="searchWrap" style="display: none">
+                                <div class="row row-cols-2 row-cols-sm-6 g-2 px-2 mb-4">
+                                    <div class="col">
+                                        <select class="form-select" name="shDelNy" id="shDelNy">
+                                            <option th:selected="${vo.shDelNy == null}" value="">삭제여부</option>
+                                            <option th:selected="${vo.shDelNy == 1}" value="1">Y</option>
+                                            <option th:selected="${vo.shDelNy == 0}" value="0">N</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-select" name="shUseNy" id="shUseNy">
+                                            <option th:selected="${vo.shUseNy == null}" value="">사용여부</option>
+                                            <option th:selected="${vo.shUseNy == 1}" value="1">Y</option>
+                                            <option th:selected="${vo.shUseNy == 0}" value="0">N</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <input type="date" class="form-control"placeholder="시작일">
+                                    </div>
+                                    <div class="col">
+                                        <input type="date" class="form-control" placeholder="종료일">
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <select class="form-select" name="shUseNy" id="shUseNy">
-                                        <option th:selected="${vo.shUseNy == null}" value="">사용여부</option>
-                                        <option th:selected="${vo.shUseNy == 1}" value="1">Y</option>
-                                        <option th:selected="${vo.shUseNy == 0}" value="0">N</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <input type="date" class="form-control"placeholder="시작일">
-                                </div>
-                                <div class="col">
-                                    <input type="date" class="form-control" placeholder="종료일">
+                                <div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
+                                    <div class="col">
+                                        <select class="form-select" id="shOption" name="shOption">
+                                            <option th:selected="${vo.shOption == null}" value="">검색구분</option>
+                                            <option th:selected="${vo.shOption == 1}" value="1">코드그룹 코드</option>
+                                            <option th:selected="${vo.shOption == 2}" value="2">코드그룹 이름</option>
+                                            <option th:selected="${vo.shOption == 3}" value="3">코드그룹 영어 이름</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" th:value="${vo.shValue}" id="shValue" name="shValue" placeholder="검색어">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
-                                <div class="col">
-                                    <select class="form-select" id="shOption" name="shOption">
-                                        <option th:selected="${vo.shOption == null}" value="">검색구분</option>
-                                        <option th:selected="${vo.shOption == 1}" value="1">코드그룹 코드</option>
-                                        <option th:selected="${vo.shOption == 2}" value="2">코드그룹 이름</option>
-                                        <option th:selected="${vo.shOption == 3}" value="3">코드그룹 영어 이름</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" th:value="${vo.shValue}" id="shValue" name="shValue" placeholder="검색어">
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-secondary"><i class="fa fa-rotate-left"></i></button>
-                                    <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
+                                <div class="d-flex justify-content-end">
+                                    <div class="p-2">
+                                        <span style="cursor:pointer; margin-left: 10px;" onclick="showHide('searchWrap');">
+						                    <a id="showBtn" onclick='change()'><i class="fa fa-chevron-down" style="color: #FFFFFF"></i></a>
+                                        </span>
+                                    </div>
+                                    <div class="p-2">
+                                        <button class="btn btn-secondary btn-sm"><i class="fa fa-rotate-left"></i></button>
+                                        <button class="btn btn-secondary btn-sm" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -185,7 +197,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="member : ${list}" th:attr="onclick=|goForm('${member.codeGroupSeq}')|">
+                            <tr th:each="member : ${list}" th:attr="onclick=|goForm('${member.codeGroupSeq}')|" style="cursor: pointer;">
                                 <td th:text="${member.codeGroupSeq}"></td>
                                 <td th:text="${member.codeGroupName}"></td>
                                 <td th:text="${member.codeGroupNameEng}"></td>
@@ -200,9 +212,15 @@
                     <div class="d-flex justify-content-end">
                         <div class="p-2"><button class="btn btn-secondary" id="btnForm">생성</button></div>
                     </div>
+                    <ul class="pagination justify-content-center mb-0">
+                        <li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item"><a class="page-link" th:attr="onclick=|goList('${vo.startPage - 1}')|"><</a></li>
+                        <li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" class="page-item" th:classappend="${num eq vo.thisPage} ? active : ''">
+                            <a th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
+                        </li>
+                        <li th:if="${vo.endPage ne vo.totalPages}" class="page-item"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|">></a></li>
+                    </ul>
                 </form>
             </section>
-            <!-- /.content -->
         </div>
     </div>
 </div>
@@ -223,6 +241,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
+    let goUrlList = "/codegroup/list";
     let goUrlForm = "/codegroup/form";
     let form = $("form[name=form]")
     let seq = $("[name=codeGroupSeq]");
@@ -235,6 +254,25 @@
         seq.val(keyValue);
         form.attr("action", goUrlForm).submit();
     }
+    function showHide(id){
+        let objId = document.getElementById(id);
+        if(objId.style.display == "block"){
+            objId.style.display = "none";
+        } else {
+            objId.style.display = "block";
+        }
+    }
+    goList = function(thisPage) {
+        $("input:hidden[name=thisPage]").val(thisPage);
+        form.attr("action", goUrlList).submit();
+    }
+    function change() {
+        const subs = document.getElementById("showBtn")
+        if(subs.innerHTML == '<i class="fa fa-chevron-up" style="color: #FFFFFF"></i>') {
+            subs.innerHTML = '<i class="fa fa-chevron-down" style="color: #FFFFFF"></i>';
+        } else subs.innerHTML ='<i class="fa fa-chevron-up" style="color: #FFFFFF"></i>';
+    }
+
 </script>
 </body>
 </html>
