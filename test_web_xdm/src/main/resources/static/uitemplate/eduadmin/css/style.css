@@ -131,7 +131,9 @@ body {
 /*---basic---*/
 a {
   color: #2f579a; }
-
+tbody td {
+  text-align: center;
+}
 a:hover, a:active, a:focus {
   outline: 0;
   text-decoration: none; }

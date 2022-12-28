@@ -231,8 +231,8 @@
                                 </table>
                             </div>
                             <div class="d-flex">
-                                <div class="p-2 me-auto"><button class="btn btn-danger-light" id="btnDelete" type="button" data-bs-toggle="modal" data-bs-target="#myModal">delete</button></div>
-                                <div class="p-2"><button class="btn btn-secondary" id="btnForm">insert</button></div>
+                                <div class="p-2 me-auto"><button class="btn btn-danger-light" id="btnDelete" type="button" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-trash"></i></button></div>
+                                <div class="p-2"><button class="btn btn-success-light btn-sm" id="btnForm"><i class="fa fa-plus"></i></button></div>
                             </div>
                             <div class="dataTables_paginate paging_simple_numbers">
                                 <ul class="pagination justify-content-center mb-0">
@@ -312,6 +312,7 @@
         $("input:hidden[name=thisPage]").val(thisPage);
         form.attr("action", goUrlList).submit();
     }
+
     function change() {
         const subs = document.getElementById("showBtn")
         if(subs.innerHTML == '<i class="fa fa-chevron-up" style="color: #FFFFFF"></i>') {
@@ -322,6 +323,14 @@
     $("#CheckBoxAll").click(function() {
         if($("#CheckBoxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
         else $("input[name=checkboxSeq]").prop("checked", false);
+    });
+
+    $("input[name=CheckBoxAll]").click(function() {
+        let total = $("input[name=CheckBoxAll]").length;
+        let checked = $("input[name=CheckBoxAll]:checked").length;
+
+        if(total != checked) $("#CheckBoxAll").prop("checked", false);
+        else $("#CheckBoxAll").prop("checked", true);
     });
 
     $("#btnDelete").on("click", function(){
@@ -343,9 +352,7 @@
         });
 
         $("input:hidden[name=checkboxSeqArray]").val(checkboxSeqArray);
-
         $("#modalConfirm").modal("hide");
-
         form.attr("action", goUrlMultiDele).submit();
     });
 </script>
