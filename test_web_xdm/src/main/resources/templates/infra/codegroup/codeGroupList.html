@@ -169,56 +169,61 @@
                                     </div>
                                 </div>
                             </div>
-                                <div class="d-flex justify-content-end">
-                                    <div class="p-2">
-                                        <span style="cursor:pointer; margin-left: 10px;" onclick="showHide('searchWrap');">
-						                    <a id="showBtn" onclick='change()'><i class="fa fa-chevron-down" style="color: #FFFFFF"></i></a>
-                                        </span>
-                                    </div>
-                                    <div class="p-2">
-                                        <button class="btn btn-secondary btn-sm"><i class="fa fa-rotate-left"></i></button>
-                                        <button class="btn btn-secondary btn-sm" type="submit"><i class="fa fa-search"></i></button>
-                                    </div>
+                            <div class="d-flex justify-content-end">
+                                <div class="p-2">
+                                    <span style="cursor:pointer; margin-left: 10px;" onclick="showHide('searchWrap');">
+                                        <a id="showBtn" onclick='change()'><i class="fa fa-chevron-down" style="color: #FFFFFF"></i></a>
+                                    </span>
+                                </div>
+                                <div class="p-2">
+                                    <button class="btn btn-secondary btn-sm"><i class="fa fa-rotate-left"></i></button>
+                                    <button class="btn btn-secondary btn-sm" type="submit"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive-sm">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <td>seq</td>
-                                <td>코드그룹이름</td>
-                                <td>코드그룹 영어이름</td>
-                                <td>코드그룹 사용여부</td>
-                                <td>코드그룹 삭제여부</td>
-                                <td>코드그룹 생성날짜</td>
-                                <td>코드그룹 수정날짜</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="member : ${list}" th:attr="onclick=|goForm('${member.codeGroupSeq}')|" style="cursor: pointer;">
-                                <td th:text="${member.codeGroupSeq}"></td>
-                                <td th:text="${member.codeGroupName}"></td>
-                                <td th:text="${member.codeGroupNameEng}"></td>
-                                <td th:text="${member.codeGroupUseNY}"></td>
-                                <td th:text="${member.codeGroupDelNY}"></td>
-                                <td th:text="${member.codeGroupRegdate}"></td>
-                                <td th:text="${member.codeGroupUpdate}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="table-responsive-sm">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <td>seq</td>
+                                        <td>코드그룹이름</td>
+                                        <td>코드그룹 영어이름</td>
+                                        <td>코드그룹 사용여부</td>
+                                        <td>코드그룹 삭제여부</td>
+                                        <td>코드그룹 생성날짜</td>
+                                        <td>코드그룹 수정날짜</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="member : ${list}" th:attr="onclick=|goForm('${member.codeGroupSeq}')|" style="cursor: pointer;">
+                                        <td th:text="${member.codeGroupSeq}"></td>
+                                        <td th:text="${member.codeGroupName}"></td>
+                                        <td th:text="${member.codeGroupNameEng}"></td>
+                                        <td th:text="${member.codeGroupUseNY}"></td>
+                                        <td th:text="${member.codeGroupDelNY}"></td>
+                                        <td th:text="${member.codeGroupRegdate}"></td>
+                                        <td th:text="${member.codeGroupUpdate}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <div class="p-2"><button class="btn btn-secondary" id="btnForm">생성</button></div>
+                            </div>
+                            <div class="dataTables_paginate paging_simple_numbers">
+                                <ul class="pagination justify-content-center mb-0">
+                                    <li th:if="${vo.startPage gt vo.pageNumToShow}" class="paginate_button page-item previous"><a class="page-link" th:attr="onclick=|goList('${vo.startPage - 1}')|"><</a></li>
+                                    <li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" class="paginate_button page-item" th:classappend="${num eq vo.thisPage} ? active : ''">
+                                        <a class="page-link" th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
+                                    </li>
+                                    <li th:if="${vo.endPage ne vo.totalPages}" class="paginate_button page-item next"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|">></a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <div class="p-2"><button class="btn btn-secondary" id="btnForm">생성</button></div>
-                    </div>
-                    <ul class="pagination justify-content-center mb-0">
-                        <li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item"><a class="page-link" th:attr="onclick=|goList('${vo.startPage - 1}')|"><</a></li>
-                        <li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" class="page-item" th:classappend="${num eq vo.thisPage} ? active : ''">
-                            <a th:attr="onclick=|goList('${num}')|" th:text="${num}"></a>
-                        </li>
-                        <li th:if="${vo.endPage ne vo.totalPages}" class="page-item"><a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}')|">></a></li>
-                    </ul>
                 </form>
             </section>
         </div>
@@ -227,17 +232,11 @@
 <!-- Page Content overlay -->
 
 <script type="text/javascript" src="/uitemplate/eduadmin/js/vendors.min.js"></script>
-<script type="text/javascript" src="/uitemplate/eduadmin/js/pages/chat-popup.js"></script>
 <script type="text/javascript" src="/uitemplate/eduadmin/assets/icons/feather-icons/feather.min.js"></script>
-
-<script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
 <script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/moment/min/moment.min.js"></script>
-<script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/fullcalendar/fullcalendar.js"></script>
 
-<!-- EduAdmin App -->
 <script type="text/javascript" src="/uitemplate/eduadmin/js/template.js"></script>
-<script type="text/javascript" src="/uitemplate/eduadmin/js/pages/dashboard.js"></script>
-<script type="text/javascript" src="/uitemplate/eduadmin/js/pages/calendar.js"></script>
+<script type="text/javascript" src="/uitemplate/eduadmin/js/pages/data-table.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
