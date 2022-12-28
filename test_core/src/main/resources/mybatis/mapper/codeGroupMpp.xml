@@ -17,6 +17,10 @@
         <if test="shUseNy != null and !shUseNy.equals('')">AND codeGroupUseNY = #{shUseNy}</if>
         <if test="shDelNy != null and !shDelNy.equals('')">AND codeGroupDelNY = #{shDelNy}</if>
         <choose>
+            <when test="shOptionDate == 1">AND codeGroupRegdate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+            <when test="shOptionDate == 2">AND codeGroupUpdate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+        </choose>
+        <choose>
             <when test="shOption == 1">AND codeGroupSeq = #{shValue}</when>
             <when test="shOption == 2">AND codeGroupName LIKE CONCAT('%',#{shValue},'%')</when>
             <when test="shOption == 3">AND codeGroupNameEng LIKE CONCAT('%',#{shValue},'%')</when>

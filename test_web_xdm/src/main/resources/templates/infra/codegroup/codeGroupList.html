@@ -125,10 +125,11 @@
         <div class="container-full">
             <!-- Main content -->
             <section class="content">
-                <form name="form">
+                <form name="form" method="post">
                     <input type="hidden" name="codeGroupSeq">
                     <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
                     <input type="hidden" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+                    <input type="hidden" name="checkboxSeqArray">
                     <h2>CodeGroup</h2>
                     <div class="box">
                         <div class="box-body">
@@ -149,10 +150,17 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <input type="date" class="form-control"placeholder="시작일">
+                                        <select class="form-select" name="shOptionDate" id="shOptionDate">
+                                            <option th:selected="${vo.shOptionDate == null}" value="">날짜</option>
+                                            <option th:selected="${vo.shOptionDate == 1}" value="1">생성일</option>
+                                            <option th:selected="${vo.shOptionDate == 2}" value="2">수정일</option>
+                                        </select>
                                     </div>
                                     <div class="col">
-                                        <input type="date" class="form-control" placeholder="종료일">
+                                        <input type="date" class="form-control" name="shDateStart" placeholder="시작일">
+                                    </div>
+                                    <div class="col">
+                                        <input type="date" class="form-control" name="shDateEnd" placeholder="종료일">
                                     </div>
                                 </div>
                                 <div class="row row-cols-2 row-cols-sm-6 g-2 px-2">
@@ -188,6 +196,12 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
+                                        <td>
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="CheckBoxAll">
+                                                <label for="CheckBoxAll"></label>
+                                            </div>
+                                        </td>
                                         <td>seq</td>
                                         <td>코드그룹이름</td>
                                         <td>코드그룹 영어이름</td>
@@ -198,8 +212,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="member : ${list}" th:attr="onclick=|goForm('${member.codeGroupSeq}')|" style="cursor: pointer;">
-                                        <td th:text="${member.codeGroupSeq}"></td>
+                                    <tr th:each="member : ${list}">
+                                        <td>
+                                            <div class="checkbox">
+                                                <input type="checkbox"  th:id="'checkboxSeq_' + ${member.codeGroupSeq}" name="checkboxSeq" th:value="${member.codeGroupSeq}">
+                                                <label th:for="'checkboxSeq_' + ${member.codeGroupSeq}"></label>
+                                            </div>
+                                        </td>
+                                        <td th:text="${member.codeGroupSeq}" th:attr="onclick=|goForm('${member.codeGroupSeq}')|" style="cursor: pointer;"></td>
                                         <td th:text="${member.codeGroupName}"></td>
                                         <td th:text="${member.codeGroupNameEng}"></td>
                                         <td th:text="${member.codeGroupUseNY}"></td>
@@ -210,8 +230,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="d-flex justify-content-end">
-                                <div class="p-2"><button class="btn btn-secondary" id="btnForm">생성</button></div>
+                            <div class="d-flex">
+                                <div class="p-2 me-auto"><button class="btn btn-danger-light" id="btnDelete" type="button" data-bs-toggle="modal" data-bs-target="#myModal">delete</button></div>
+                                <div class="p-2"><button class="btn btn-secondary" id="btnForm">insert</button></div>
                             </div>
                             <div class="dataTables_paginate paging_simple_numbers">
                                 <ul class="pagination justify-content-center mb-0">
@@ -228,6 +249,27 @@
             </section>
         </div>
     </div>
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex justify-content-end">
+                        <div class="p-2"><button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">확인</button></div>
+                        <div class="p-2"><button type="button" class="btn btn-danger btn-sm" name="" id="btnModalDelete">delete</button></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 </div>
 <!-- Page Content overlay -->
 
@@ -242,8 +284,11 @@
 <script type="text/javascript">
     let goUrlList = "/codegroup/list";
     let goUrlForm = "/codegroup/form";
+    let goUrlMultiDele = "/codegroup/codeGroupMultiDele";
+
     let form = $("form[name=form]")
     let seq = $("[name=codeGroupSeq]");
+    let checkboxSeqArray = [];
 
     $('#btnForm').on("click", function() {
         goForm(0);
@@ -253,6 +298,7 @@
         seq.val(keyValue);
         form.attr("action", goUrlForm).submit();
     }
+
     function showHide(id){
         let objId = document.getElementById(id);
         if(objId.style.display == "block"){
@@ -261,6 +307,7 @@
             objId.style.display = "block";
         }
     }
+
     goList = function(thisPage) {
         $("input:hidden[name=thisPage]").val(thisPage);
         form.attr("action", goUrlList).submit();
@@ -272,6 +319,35 @@
         } else subs.innerHTML ='<i class="fa fa-chevron-up" style="color: #FFFFFF"></i>';
     }
 
+    $("#CheckBoxAll").click(function() {
+        if($("#CheckBoxAll").is(":checked")) $("input[name=checkboxSeq]").prop("checked", true);
+        else $("input[name=checkboxSeq]").prop("checked", false);
+    });
+
+    $("#btnDelete").on("click", function(){
+        if($("input[name=checkboxSeq]:checked").length > 0 ) {
+            $(".modal-title").text("확 인");
+            $(".modal-body").text("해당 데이터를 삭제하시겠습니까 ?");
+            $("#btnModalDelete").show();
+            $("#modalConfirm").modal("show");
+        } else {
+            $(".modal-title").text("확 인");
+            $(".modal-body").text("데이터를 선택해 주세요!");
+            $("#btnModalDelete").hide();
+        }
+    });
+
+    $("#btnModalDelete").on("click", function(){
+        $("input[name=checkboxSeq]:checked").each(function() {
+            checkboxSeqArray.push($(this).val());
+        });
+
+        $("input:hidden[name=checkboxSeqArray]").val(checkboxSeqArray);
+
+        $("#modalConfirm").modal("hide");
+
+        form.attr("action", goUrlMultiDele).submit();
+    });
 </script>
 </body>
 </html>

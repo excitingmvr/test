@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.List;
 
 @Controller
@@ -26,8 +28,11 @@ public class CodeGroupController {
     }
     @RequestMapping(value= "/insert")
 
-    public String CodeGroupInst(CodeGroup dto) throws  Exception {
+    public String CodeGroupInst(CodeGroupVo vo,CodeGroup dto, RedirectAttributes redirectAttributes) throws  Exception {
             codeGroupService.insert(dto);
+            vo.setCodeGroupSeq(dto.getCodeGroupSeq());
+            redirectAttributes.addFlashAttribute("vo", vo);
+
         return "redirect:/codegroup/list";
     }
     @RequestMapping(value= "/update")
@@ -44,5 +49,15 @@ public class CodeGroupController {
     public String CodeGroupForm(CodeGroupVo vo, Model model) throws  Exception {
         model.addAttribute("item", codeGroupService.selectOne(vo));
         return "infra/codegroup/codeGroupForm";
+    }
+    @RequestMapping(value = "codeGroupMultiDele")
+    public String codeGroupMultiDele(CodeGroupVo vo) throws Exception {
+
+        for (String checkboxSeq : vo.getCheckboxSeqArray()) {
+            vo.setCodeGroupSeq(checkboxSeq);
+            codeGroupService.delete(vo);
+        }
+
+        return "redirect:/codegroup/list";
     }
 }

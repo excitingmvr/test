@@ -193,6 +193,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex">
+                                    <div class="p-2"><button class="btn btn-secondary" id="btnList">list</button></div>
                                     <div class="p-2 me-auto">
                                         <button class="btn btn-danger" type="button" id="btnDelete" data-bs-toggle="modal" data-bs-target="#myModal">delete</button>
                                     </div>
@@ -234,6 +235,8 @@
         let goUrlInst = "/codegroup/insert";
         let goUrlUpdt = "/codegroup/update";
         let goUrlDele = "/codegroup/delete";
+        let goUrlList = "/codegroup/list"
+
         let seq = $("input:text[name=codeGroupSeq]");
         let form = $("form[name=form]");
 
@@ -246,11 +249,12 @@
                 form.attr("action", goUrlUpdt).submit();
             }
         });
-
+        $("#btnList").on("click", function () {
+           form.attr("action", goUrlList).submit();
+        });
         validationInst = function() {
             if(validationUpdt() == false) return false;
         }
-
         function validationUpdt() {
             if(!checkOnlyKoreanEnglishNumber('codeGroupName', 2, 0, "코드그룹 이름은 한글, 영문대소문자, 숫자만 입력 가능합니다.")) return false;
             if(!checkOnlyEnglishNumber('codeGroupNameEng', 2, 0, '코드그룹 이름(영문)은 영문대소문자, 숫자만 입력 가능합니다.')) return false;
@@ -263,7 +267,6 @@
             $("#btnModalDelete").show();
             $("#modalConfirm").modal("show");
         });
-
         $("#btnModalDelete").on("click", function(){
             $("#modalConfirm").modal("hide");
             form.attr("action", goUrlDele).submit();
