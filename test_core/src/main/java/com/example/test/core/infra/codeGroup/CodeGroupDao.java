@@ -16,4 +16,5 @@ public interface CodeGroupDao {
     CodeGroup selectOne(CodeGroupVo vo);
     int delete(CodeGroupVo vo);
     int selectOneCount(CodeGroupVo vo);
+    int uelete(CodeGroup dto);
 }

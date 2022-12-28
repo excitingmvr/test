@@ -22,4 +22,5 @@ public class CodeGroupService {
     }
     public int delete(CodeGroupVo vo) { return codeGroupDao.delete(vo); }
     public int selectOneCount(CodeGroupVo vo) { return codeGroupDao.selectOneCount(vo); }
+    public int uelete(CodeGroup dto) { return codeGroupDao.uelete(dto); }
 }

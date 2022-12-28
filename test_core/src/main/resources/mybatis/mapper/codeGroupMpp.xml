@@ -80,7 +80,13 @@
         WHERE
             codeGroupSeq = #{codeGroupSeq}
     </update>
-
+    <update id="uelete" parameterType="com.example.test.core.infra.codeGroup.CodeGroup">
+        update CodeGroup
+        SET
+            codeGroupDelNY = 1
+        WHERE
+            codeGroupSeq = #{codeGroupSeq}
+    </update>
     <delete id="delete">
         delete from CodeGroup
         where 1=1

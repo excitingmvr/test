@@ -40,6 +40,11 @@ public class CodeGroupController {
             codeGroupService.update(dto);
         return "redirect:/codegroup/list";
     }
+    @RequestMapping(value= "/uelete")
+    public String CodeGroupUele(CodeGroup dto) throws  Exception {
+        codeGroupService.uelete(dto);
+        return "redirect:/codegroup/list";
+    }
     @RequestMapping(value= "/delete")
     public String CodeGroupDele(CodeGroupVo vo) throws  Exception {
         codeGroupService.delete(vo);
@@ -52,12 +57,18 @@ public class CodeGroupController {
     }
     @RequestMapping(value = "codeGroupMultiDele")
     public String codeGroupMultiDele(CodeGroupVo vo) throws Exception {
-
         for (String checkboxSeq : vo.getCheckboxSeqArray()) {
             vo.setCodeGroupSeq(checkboxSeq);
             codeGroupService.delete(vo);
         }
-
+        return "redirect:/codegroup/list";
+    }
+    @RequestMapping(value = "codeGroupMultiUele")
+    public String codeGroupMultiUele(CodeGroup dto, CodeGroupVo vo) throws Exception {
+        for (String checkboxSeq : vo.getCheckboxSeqArray()) {
+            dto.setCodeGroupSeq(checkboxSeq);
+            codeGroupService.uelete(dto);
+        }
         return "redirect:/codegroup/list";
     }
 }
