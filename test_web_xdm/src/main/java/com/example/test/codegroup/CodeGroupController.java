@@ -33,7 +33,7 @@ public class CodeGroupController {
             vo.setCodeGroupSeq(dto.getCodeGroupSeq());
             redirectAttributes.addFlashAttribute("vo", vo);
 
-        return "redirect:/codegroup/list";
+        return "redirect:/codegroup/form";
     }
     @RequestMapping(value= "/update")
     public String CodeGroupUpdt(CodeGroup dto) throws  Exception {
