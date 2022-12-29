@@ -9,7 +9,6 @@
     <title>StyleBot-Dashboard</title>
 
     <!-- Vendors Style-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/uitemplate/eduadmin/css/vendors_css.css">
 
     <!-- Style-->
@@ -212,21 +211,21 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="member : ${list}">
-                                        <td>
-                                            <div class="checkbox">
-                                                <input type="checkbox"  th:id="'checkboxSeq_' + ${member.codeGroupSeq}" name="checkboxSeq" th:value="${member.codeGroupSeq}">
-                                                <label th:for="'checkboxSeq_' + ${member.codeGroupSeq}"></label>
-                                            </div>
-                                        </td>
-                                        <td th:text="${member.codeGroupSeq}" th:attr="onclick=|goForm('${member.codeGroupSeq}')|" style="cursor: pointer;"></td>
-                                        <td th:text="${member.codeGroupName}"></td>
-                                        <td th:text="${member.codeGroupNameEng}"></td>
-                                        <td th:text="${member.codeGroupUseNY}"></td>
-                                        <td th:text="${member.codeGroupDelNY}"></td>
-                                        <td th:text="${member.codeGroupRegdate}"></td>
-                                        <td th:text="${member.codeGroupUpdate}"></td>
-                                    </tr>
+                                        <tr th:each="member : ${list}">
+                                            <td>
+                                                <div class="checkbox">
+                                                    <input type="checkbox"  th:id="'checkboxSeq_' + ${member.codeGroupSeq}" name="checkboxSeq" th:value="${member.codeGroupSeq}">
+                                                    <label th:for="'checkboxSeq_' + ${member.codeGroupSeq}"></label>
+                                                </div>
+                                            </td>
+                                            <td th:text="${member.codeGroupSeq}" th:attr="onclick=|goForm('${member.codeGroupSeq}')|" style="cursor: pointer;"></td>
+                                            <td th:text="${member.codeGroupName}"></td>
+                                            <td th:text="${member.codeGroupNameEng}"></td>
+                                            <td th:text="${member.codeGroupUseNY}"></td>
+                                            <td th:text="${member.codeGroupDelNY}"></td>
+                                            <td th:text="${member.codeGroupRegdate}"></td>
+                                            <td th:text="${member.codeGroupUpdate}"></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -280,7 +279,6 @@
 <script type="text/javascript" src="/uitemplate/eduadmin/assets/vendor_components/moment/min/moment.min.js"></script>
 
 <script type="text/javascript" src="/uitemplate/eduadmin/js/template.js"></script>
-<script type="text/javascript" src="/uitemplate/eduadmin/js/pages/data-table.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
