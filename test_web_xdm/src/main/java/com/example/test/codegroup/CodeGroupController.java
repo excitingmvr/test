@@ -21,24 +21,23 @@ public class CodeGroupController {
     @RequestMapping(value = "/list")
     public String CodeGroupList(Model model, @ModelAttribute("vo") CodeGroupVo vo) throws Exception{
             vo.setParamsPaging(codeGroupService.selectOneCount(vo));
-
             List<CodeGroup> list = codeGroupService.selectList(vo);
             model.addAttribute("list", list);
         return "infra/codegroup/codeGroupList";
     }
     @RequestMapping(value= "/insert")
-
-    public String CodeGroupInst(CodeGroupVo vo,CodeGroup dto, RedirectAttributes redirectAttributes) throws  Exception {
+    public String CodeGroupInst(@ModelAttribute("vo") CodeGroupVo vo,CodeGroup dto, RedirectAttributes redirectAttributes) throws  Exception {
             codeGroupService.insert(dto);
             vo.setCodeGroupSeq(dto.getCodeGroupSeq());
             redirectAttributes.addFlashAttribute("vo", vo);
-
         return "redirect:/codegroup/form";
     }
     @RequestMapping(value= "/update")
-    public String CodeGroupUpdt(CodeGroup dto) throws  Exception {
+    public String CodeGroupUpdt(@ModelAttribute("vo") CodeGroupVo vo, CodeGroup dto, RedirectAttributes redirectAttributes) throws Exception {
             codeGroupService.update(dto);
-        return "redirect:/codegroup/list";
+            vo.setCodeGroupSeq(dto.getCodeGroupSeq());
+            redirectAttributes.addFlashAttribute("vo", vo);
+        return "redirect:/codegroup/form";
     }
     @RequestMapping(value= "/uelete")
     public String CodeGroupUele(CodeGroup dto) throws  Exception {
@@ -51,7 +50,7 @@ public class CodeGroupController {
         return "redirect:/codegroup/list";
     }
     @RequestMapping(value= "/form")
-    public String CodeGroupForm(CodeGroupVo vo, Model model) throws  Exception {
+    public String CodeGroupForm(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws  Exception {
         model.addAttribute("item", codeGroupService.selectOne(vo));
         return "infra/codegroup/codeGroupForm";
     }
