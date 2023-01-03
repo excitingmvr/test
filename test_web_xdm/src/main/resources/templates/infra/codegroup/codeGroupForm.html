@@ -104,7 +104,7 @@
                                     <div class="p-2 me-auto">
                                         <button class="btn btn-danger-light btn-sm" type="button" id="btnDelete" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-trash"></i></button>
                                     </div>
-                                    <div class="p-2"><button class="btn btn-success-light btn-sm" type="button" id="BtnSubmit"><i class="fa fa-check"></i></button></div>
+                                    <div class="p-2"><button class="btn btn-success-light btn-sm" type="button" id="btnSubmit"><i class="fa fa-check"></i></button></div>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,6 @@
 
         let seq = $("input:text[name=codeGroupSeq]");
         let form = $("form[name=form]");
-        let formVo = $("form[name=formVo]");
 
         $("#btnSubmit").on("click", function() {
             if (seq.val() == "0" || seq.val() == ""){

@@ -19,11 +19,17 @@ public class CodeGroupController {
 
     private final CodeGroupService codeGroupService;
     @RequestMapping(value = "/list")
-    public String CodeGroupList(Model model, @ModelAttribute("vo") CodeGroupVo vo) throws Exception{
-            vo.setParamsPaging(codeGroupService.selectOneCount(vo));
-            List<CodeGroup> list = codeGroupService.selectList(vo);
-            model.addAttribute("list", list);
+    public String CodeGroupList(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception{
         return "infra/codegroup/codeGroupList";
+    }
+    @RequestMapping(value = "/lita")
+    public String CodeGroupLita(Model model, @ModelAttribute("vo") CodeGroupVo vo) throws Exception {
+
+        vo.setParamsPaging(codeGroupService.selectOneCount(vo));
+
+        model.addAttribute("list", codeGroupService.selectList(vo));
+
+        return "infra/codegroup/codeGroupLita";
     }
     @RequestMapping(value= "/insert")
     public String CodeGroupInst(@ModelAttribute("vo") CodeGroupVo vo,CodeGroup dto, RedirectAttributes redirectAttributes) throws  Exception {
