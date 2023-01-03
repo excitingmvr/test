@@ -26,7 +26,7 @@
             <!-- Main content -->
             <section class="content">
                 <form name="form" id="form" method="post">
-                    <input type="hidden" name="checkboxSeqArray">
+                    <input type="hidden" name="codeGroupSeq">
                     <h2>CodeGroup</h2>
                     <div class="box">
                         <div class="box-body">
@@ -112,13 +112,8 @@
     let seq = $("[name=codeGroupSeq]");
 
     $(document).ready(function () {
-        setLita(page);
+        setLita();
     });
-
-    goForm = function(keyValue) {
-        seq.val(keyValue);
-        form.attr("action", goUrlForm).submit();
-    }
 
     function showHide(id){
         let objId = document.getElementById(id);
@@ -130,7 +125,6 @@
     }
     $("#btnSearch").on("click", function(){
         form.attr("action", goUrlList).submit();
-        setLita();
     });
 
     function change() {
@@ -159,6 +153,8 @@
             }
         });
     }
+    console.log(location.hash);
+
     $(window).bind('hashchange', function() {
         $.ajax({
             async: true
