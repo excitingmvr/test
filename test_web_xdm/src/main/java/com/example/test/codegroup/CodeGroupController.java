@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class CodeGroupController {
     @RequestMapping(value = "/lita")
     public String CodeGroupLita(Model model, @ModelAttribute("vo") CodeGroupVo vo) throws Exception {
 
-        vo.setParamsPaging(codeGroupService.selectOneCount(vo));
+//        vo.setParamsPaging(codeGroupService.selectOneCount(vo));
 
         model.addAttribute("list", codeGroupService.selectList(vo));
 
@@ -68,12 +70,9 @@ public class CodeGroupController {
         }
         return "redirect:/codegroup/list";
     }
-    @RequestMapping(value = "codeGroupMultiUele")
-    public String codeGroupMultiUele(CodeGroup dto, CodeGroupVo vo) throws Exception {
-        for (String checkboxSeq : vo.getCheckboxSeqArray()) {
-            dto.setCodeGroupSeq(checkboxSeq);
-            codeGroupService.uelete(dto);
-        }
-        return "redirect:/codegroup/list";
-    }
+//    @RequestMapping(value = "codeGroupMultiUele2")
+//    public String codeGroupMultiUㅇele(CodeGroup dto, CodeGroupVo vo) throws Exception {
+//        codeGroupService.deleteAllByIds(Set.of(vo.getCheckboxSeqArray()));
+//        return "redirect:/codegroup/list";
+//    }
 }

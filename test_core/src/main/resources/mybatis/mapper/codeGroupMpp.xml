@@ -87,6 +87,18 @@
         WHERE
             codeGroupSeq = #{codeGroupSeq}
     </update>
+<!--제가 mybatis 매퍼 문법을 모르므로 알아서 고치세요-->
+<!--    <update id="deleteAllByIds" parameterType="set">-->
+<!--        update CodeGroup-->
+<!--        SET-->
+<!--            codeGroupDelNY = 1-->
+<!--        WHERE-->
+<!--            codeGroupSeq IN-->
+<!--                <foreach collection="empNoList" item="code" index="index" separator="," open="(" close=")">-->
+<!--                    #{id}-->
+<!--                </foreach>-->
+<!--    </update>-->
+
     <delete id="delete">
         delete from CodeGroup
         where 1=1
