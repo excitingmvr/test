@@ -5,10 +5,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 @Repository
-
 public interface CodeGroupDao {
     List<CodeGroup> selectList(CodeGroupVo vo);
     int insert(CodeGroup dto);
@@ -17,4 +17,6 @@ public interface CodeGroupDao {
     int delete(CodeGroupVo vo);
     int selectOneCount(CodeGroupVo vo);
     int uelete(CodeGroup dto);
+
+//    int deleteAllByIds(Set<String> ids);
 }
